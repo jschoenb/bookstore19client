@@ -14,8 +14,8 @@ export class BookStoreService {
   }
 
   getAll(): Observable<Array<Book>>{
-    return this.http.get(`${this.api}/books`).
-      pipe(retry(3)).pipe(catchError(this.errorHandler));
+    return this.http.get(`${this.api}/books`)
+    .pipe(retry(3)).pipe(catchError(this.errorHandler));
   }
 
   getSingle(isbn): Observable<Book>{
