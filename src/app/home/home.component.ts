@@ -10,6 +10,7 @@ import { Component } from '@angular/core';
        Buchliste ansehen
        <i class="right arrow icon"></i>
      </a>
+     <bs-search class="column"></bs-search>
    </div>
  `,
   styles: []

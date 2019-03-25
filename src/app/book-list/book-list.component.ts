@@ -15,8 +15,6 @@ export class BookListComponent implements OnInit {
     this.bs.getAll().subscribe(
       res => {
         this.books = res;
-        console.log(this.books);
-       console.log("Finished on init");
       });
     //
   }
