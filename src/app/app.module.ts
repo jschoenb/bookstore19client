@@ -8,13 +8,15 @@ import { BookDetailsComponent } from './book-details/book-details.component';
 import {BookStoreService} from './shared/book-store.service';
 import { HomeComponent } from './home/home.component';
 import {AppRoutingModule} from './app-routing.module';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { BookFormComponent } from './book-form/book-form.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import { SearchComponent } from './search/search.component';
 import {DateValueAccessorModule} from 'angular-date-value-accessor';
 import { LoginComponent } from './login/login.component';
 import {AuthService} from './shared/authentication.service';
+import {TokenInterceptorService} from './shared/token-interceptor.service';
+import {JwtInterceptorService} from './shared/jwt-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,19 @@ import {AuthService} from './shared/authentication.service';
     BrowserModule, AppRoutingModule, HttpClientModule,
     ReactiveFormsModule, DateValueAccessorModule
   ],
-  providers: [BookStoreService, AuthService],
+  providers: [BookStoreService, AuthService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptorService,
+      multi: true
+    }
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
