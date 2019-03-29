@@ -12,6 +12,9 @@ import {HttpClientModule} from '@angular/common/http';
 import { BookFormComponent } from './book-form/book-form.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import { SearchComponent } from './search/search.component';
+import {DateValueAccessorModule} from 'angular-date-value-accessor';
+import { LoginComponent } from './login/login.component';
+import {AuthService} from './shared/authentication.service';
 
 @NgModule({
   declarations: [
@@ -21,13 +24,14 @@ import { SearchComponent } from './search/search.component';
     BookDetailsComponent,
     HomeComponent,
     BookFormComponent,
-    SearchComponent
+    SearchComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule, HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule, DateValueAccessorModule
   ],
-  providers: [BookStoreService],
+  providers: [BookStoreService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Book} from '../shared/book';
 
 @Component({
   selector: 'bs-home',
@@ -10,9 +12,17 @@ import { Component } from '@angular/core';
        Buchliste ansehen
        <i class="right arrow icon"></i>
      </a>
-     <bs-search class="column"></bs-search>
+     <bs-search class="column" (bookSelected)="bookSelected($event)"></bs-search>
    </div>
  `,
   styles: []
 })
-export class HomeComponent { }
+export class HomeComponent {
+
+  constructor(private router:Router, private route: ActivatedRoute){}
+
+  bookSelected(book:Book){
+    this.router.navigate(['../books',book.isbn],
+      {relativeTo:this.route});
+  }
+}
