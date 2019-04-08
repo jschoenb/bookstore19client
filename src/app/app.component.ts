@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {Book} from './shared/book';
+import {AuthService} from './shared/authentication.service';
 
 @Component({
   selector: 'bs-root',
@@ -11,19 +12,17 @@ import {Book} from './shared/book';
   styles: []
 })
 export class AppComponent {
-  listOn = true;
-  detailsOn = false;
+  constructor(private authService : AuthService){  }
 
-  book: Book;
-
-  showList(){
-    this.listOn = true;
-    this.detailsOn = false;
+  isLoggedIn(){
+    return this.authService.isLoggedIn();
   }
 
-  showDetails(book: Book){
-    this.book = book;
-    this.listOn = false;
-    this.detailsOn = true;
+  getLoginLabel(){
+    if (this.isLoggedIn()){
+      return "Logout"
+    } else {
+      return "Login"
+    }
   }
 }
